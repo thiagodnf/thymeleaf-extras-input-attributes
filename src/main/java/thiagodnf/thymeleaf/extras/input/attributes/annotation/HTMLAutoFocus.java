@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface HTMLAutoFocus {
     
-	String message() default "autofocus";
+	String tag() default "autofocus";
     
     Class<?>[] groups() default {};
     

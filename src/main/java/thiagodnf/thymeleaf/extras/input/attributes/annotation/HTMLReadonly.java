@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface HTMLReadonly {
     
-	String message() default "disabled";
+	String tag() default "readonly";
     
     Class<?>[] groups() default {};
     

@@ -90,7 +90,7 @@ public class InputAttributesProcessor extends AbstractAttributeTagProcessor {
                 
                 
                 if (annotation instanceof HTMLAutoFocus) {
-                    tags.add(getAutoFocus());
+                    tags.add(((HTMLAutoFocus)annotation).tag());
                 }
                 
                 if (annotation instanceof HTMLAutoComplete) {
@@ -102,21 +102,22 @@ public class InputAttributesProcessor extends AbstractAttributeTagProcessor {
                     tags.add(getStep((HTMLStep) annotation));
                 }
                 
-
+                // Required attributes
+                
                 if (annotation instanceof NotNull) {
-                    tags.add(getRequired());
+                    tags.add("required");
                 }
 
                 if (annotation instanceof NotBlank) {
-                    tags.add(getRequired());
+                    tags.add("required");
                 }
 
                 if (annotation instanceof NotEmpty) {
-                    tags.add(getRequired());
+                    tags.add("required");
                 }
                 
                 if (annotation instanceof HTMLRequired) {
-                    tags.add(getRequired());
+                    tags.add(((HTMLRequired)annotation).tag());
                 }
                 
                 
@@ -133,7 +134,7 @@ public class InputAttributesProcessor extends AbstractAttributeTagProcessor {
                 }
                 
                 if (annotation instanceof HTMLReadonly) {
-                    tags.add(getReadonly());
+                    tags.add(((HTMLReadonly) annotation).tag());
                 }
             }
 
@@ -171,18 +172,6 @@ public class InputAttributesProcessor extends AbstractAttributeTagProcessor {
     
     private String getSpellCheck(HTMLSpellCheck spellCheck) {
         return String.format("spellcheck=\"%s\"", spellCheck.value());
-    }
-    
-    private String getRequired() {
-        return "required";
-    }
-    
-    private String getAutoFocus() {
-        return "autofocus";
-    }
-    
-    private String getReadonly() {
-        return "readonly";
     }
     
     private String getAutoComplete(HTMLAutoComplete autoComplete) {

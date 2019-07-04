@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface HTMLRequired {
     
-	String message() default "required";
+	String tag() default "required";
     
     Class<?>[] groups() default {};
     
