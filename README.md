@@ -1,10 +1,10 @@
-# thymeleaf-extras-input-attributes
+# Thymeleaf Extras Input Attributes
 
 Thymeleaf dialect for input attributes
 
 ## Setup
 
-```maven
+```xml
 <dependency>
     <groupId>com.github.mxab.thymeleaf.extras</groupId>
     <artifactId>thymeleaf-extras-data-attribute</artifactId>
@@ -14,5 +14,31 @@ Thymeleaf dialect for input attributes
 
 ## Code
 
+```java
+@Configuration
+public class ThymeleafConfiguration {
+	
+    @Bean
+    public InputAttributesDialect getInputAttributesDialect() {
+	    return new InputAttributesDialect(true);
+    }
+}
+```
 
 ## Usage
+
+### Source
+
+```java
+public class SignupDTO {
+
+    @NotBlank
+    @HTMLAutoFocus
+    @HTMLSpellCheck("false")
+    @HTMLAutoComplete("given-name")
+    private String firstname;
+    
+ }
+```
+
+### Result
