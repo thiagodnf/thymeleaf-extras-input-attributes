@@ -38,7 +38,7 @@ public class SignupDTO {
     @HTMLAutoComplete("given-name")
     private String firstname;
     
- }
+}
 ```
 
 ### Result
