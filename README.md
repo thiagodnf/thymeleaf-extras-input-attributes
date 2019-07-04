@@ -6,9 +6,9 @@ Thymeleaf dialect for input attributes
 
 ```xml
 <dependency>
-    <groupId>com.github.mxab.thymeleaf.extras</groupId>
-    <artifactId>thymeleaf-extras-data-attribute</artifactId>
-    <version>2.0.1</version>
+	<groupId>thiagodnf.thymeleaf.extras.input.attributes</groupId>
+	<artifactId>thymeleaf-extras-input-attributes</artifactId>
+	<version>1.0.0</version>
 </dependency>
 ```
 
