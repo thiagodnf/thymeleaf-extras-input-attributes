@@ -3,6 +3,7 @@ package thiagodnf.thymeleaf.extras.input.attributes.processor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.constraints.DecimalMax;
@@ -63,11 +64,13 @@ public class InputAttributesProcessor extends AbstractAttributeTagProcessor {
         
         Object target = context.getSelectionTarget();
         
+        Class<?> cls = target.getClass();
+        
         List<String> tags = new ArrayList<>();
         
         try {
-
-            Field field = target.getClass().getDeclaredField(attributeValue);
+            
+            Field field = getField(cls, attributeValue);
 
             for (Annotation annotation : field.getAnnotations()) {
 
@@ -184,5 +187,23 @@ public class InputAttributesProcessor extends AbstractAttributeTagProcessor {
     
     private String getMaxLength(HTMLMaxLength maxLength) {
         return String.format("maxlength=\"%s\"", maxLength.value());
+    }
+    
+    private boolean containsField(Class<?> cls, String fieldName) {
+        return Arrays.stream(cls.getDeclaredFields())
+                .anyMatch(f -> f.getName().equals(fieldName));
+    }
+    
+    private Field getField(Class<?> cls, String fieldName) throws NoSuchFieldException, SecurityException {
+
+        if (containsField(cls, fieldName)) {
+            return cls.getDeclaredField(fieldName);
+        }
+
+        if(cls.getSuperclass() != null) {
+            return getField(cls.getSuperclass(), fieldName);
+        }
+        
+        return null;
     }
 }
