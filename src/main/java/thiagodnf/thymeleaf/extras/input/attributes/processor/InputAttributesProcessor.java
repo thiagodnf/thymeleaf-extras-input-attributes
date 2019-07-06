@@ -71,6 +71,10 @@ public class InputAttributesProcessor extends AbstractAttributeTagProcessor {
         try {
             
             Field field = getField(cls, attributeValue);
+            
+            if (field == null) {
+                return;
+            }
 
             for (Annotation annotation : field.getAnnotations()) {
 
