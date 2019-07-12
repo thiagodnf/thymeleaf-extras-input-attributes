@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>thiagodnf.thymeleaf.extras.input.attributes</groupId>
     <artifactId>thymeleaf-extras-input-attributes</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>thymeleaf-extras-input-attributes</name>
     <description>Thymeleaf dialect for input attributes</description>
     <packaging>jar</packaging>
