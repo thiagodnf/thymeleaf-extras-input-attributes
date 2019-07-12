@@ -10,9 +10,6 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.engine.AttributeName;
@@ -23,7 +20,9 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 import thiagodnf.thymeleaf.extras.input.attributes.annotation.HTMLAutoComplete;
 import thiagodnf.thymeleaf.extras.input.attributes.annotation.HTMLAutoFocus;
+import thiagodnf.thymeleaf.extras.input.attributes.annotation.HTMLMax;
 import thiagodnf.thymeleaf.extras.input.attributes.annotation.HTMLMaxLength;
+import thiagodnf.thymeleaf.extras.input.attributes.annotation.HTMLMin;
 import thiagodnf.thymeleaf.extras.input.attributes.annotation.HTMLMinLength;
 import thiagodnf.thymeleaf.extras.input.attributes.annotation.HTMLReadonly;
 import thiagodnf.thymeleaf.extras.input.attributes.annotation.HTMLRequired;
@@ -58,7 +57,7 @@ public class InputAttributesProcessor extends AbstractAttributeTagProcessor {
             final String attributeValue,
             final IElementTagStructureHandler structureHandler) {
 
-        if(!activate) {
+        if (!activate) {
             return;
         }
         
@@ -78,23 +77,13 @@ public class InputAttributesProcessor extends AbstractAttributeTagProcessor {
 
             for (Annotation annotation : field.getAnnotations()) {
 
-                if (annotation instanceof DecimalMin) {
-                    tags.add(getMin((DecimalMin) annotation));
-                }
-                
-                if (annotation instanceof Min) {
+                if (annotation instanceof HTMLMin) {
                     tags.add(getMin((Min) annotation));
                 }
 
-                if (annotation instanceof DecimalMax) {
-                    tags.add(getMax((DecimalMax) annotation));
-                }
-                
-                if (annotation instanceof Max) {
+                if (annotation instanceof HTMLMax) {
                     tags.add(getMax((Max) annotation));
                 }
-                
-                
                 
                 if (annotation instanceof HTMLAutoFocus) {
                     tags.add(((HTMLAutoFocus)annotation).tag());
@@ -104,29 +93,13 @@ public class InputAttributesProcessor extends AbstractAttributeTagProcessor {
                     tags.add(getAutoComplete((HTMLAutoComplete) annotation));
                 }
                 
-                
                 if (annotation instanceof HTMLStep) {
                     tags.add(getStep((HTMLStep) annotation));
                 }
                 
-                // Required attributes
-                
-                if (annotation instanceof NotNull) {
-                    tags.add("required");
-                }
-
-                if (annotation instanceof NotBlank) {
-                    tags.add("required");
-                }
-
-                if (annotation instanceof NotEmpty) {
-                    tags.add("required");
-                }
-                
                 if (annotation instanceof HTMLRequired) {
-                    tags.add(((HTMLRequired)annotation).tag());
+                    tags.add("required");
                 }
-                
                 
                 if (annotation instanceof HTMLSpellCheck) {
                     tags.add(getSpellCheck((HTMLSpellCheck) annotation));
@@ -157,16 +130,8 @@ public class InputAttributesProcessor extends AbstractAttributeTagProcessor {
         }
     }
     
-    private String getMin(DecimalMin decimalMin) {
-        return String.format("min=\"%s\"", decimalMin.value());
-    }
-    
     private String getMin(Min min) {
         return String.format("min=\"%s\"", min.value());
-    }
-    
-    private String getMax(DecimalMax decimalMax) {
-        return String.format("max=\"%s\"", decimalMax.value());
     }
     
     private String getMax(Max max) {
